@@ -3,6 +3,9 @@ project(Ptex)
 
 option(PTEX_BUILD_STATIC_LIBS "Enable building Ptex static libraries" ON)
 option(PTEX_BUILD_SHARED_LIBS "Enable building Ptex shared libraries" ON)
+option(PTEX_BUILD_TESTS "Enable building Ptex tests" ON)
+option(PTEX_BUILD_UTILS "Enable building Ptex utility programs" ON)
+
 option(PRMAN_15_COMPATIBLE_PTEX "Enable PRMan 15 compatibility" OFF)
 
 if (DEFINED ENV{CXXFLAGS_STD})
@@ -116,7 +119,11 @@ endif ()
 include_directories(src/ptex)
 
 add_subdirectory(src/ptex)
-add_subdirectory(src/utils)
-add_subdirectory(src/tests)
+if (PTEX_BUILD_UTILS)
+  add_subdirectory(src/utils)
+endif ()
+if (PTEX_BUILD_TESTS)
+  add_subdirectory(src/tests)
+endif ()
 add_subdirectory(src/doc)
 add_subdirectory(src/build)
